@@ -3,6 +3,7 @@ import Menu from "./NavBar"
 import { useLocation } from "react-router-dom";
 import { Container, Card, Row, Col, Button, Modal, Table, ModalHeader, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import {   FaUserSecret } from "react-icons/fa";
+import { url } from './url'
 
 let tweets = []
 let dummy = []
@@ -22,7 +23,7 @@ const MyTweets = () => {
         console.log(location)
         username = location.state.userName
         console.log(username)
-        fetch('http://localhost:8083/allTweetsOfUser', {
+        fetch(`${url}/allTweetsOfUser`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: username
@@ -38,7 +39,7 @@ const MyTweets = () => {
     }
 
     function fetchUserReplies() {
-        fetch('http://localhost:8083/getAllReplies')
+        fetch(`${url}/getAllReplies`)
             .then(res => {
                 return res.json()
             })

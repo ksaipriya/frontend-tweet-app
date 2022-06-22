@@ -3,6 +3,7 @@ import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { FaStickyNote } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router';
+import { url } from './url'
 import Menu from './NavBar'
 
 const PostTweets = () => {
@@ -14,7 +15,7 @@ const PostTweets = () => {
     const handlePost = (event) => {
         event.preventDefault()
         if (location.state.userName === undefined) {
-            alert("Somwthing went wrong , please login again")
+            alert("Something went wrong , please login again")
             navigate('/')
         }
         else {
@@ -23,16 +24,21 @@ const PostTweets = () => {
             }
             else {
                 console.log(tweetContent)
-                fetch("http://localhost:8083/addTweet", {
+                fetch(`${url}/addTweet`, {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         username: location.state.userName,
                         tweet: tweetContent
                     })
-                }).then(() => {
-                    alert('posted ur tweet')
-                    navigate('/success', { state: { userName: location.state.userName, userId: location.state.userId } })
+                }).then((res) => {
+                    if (res.status === 200) {
+                        alert('posted ur tweet')
+                        navigate('/success', { state: { userName: location.state.userName, userId: location.state.userId } })
+                    }
+                    else {
+                        alert('something went wrong')
+                    }
                 })
             }
         }
@@ -44,7 +50,7 @@ const PostTweets = () => {
 
     return (
         <div>
-            <Menu/>
+            <Menu />
             <Container>
                 <Row>
                     <Col>

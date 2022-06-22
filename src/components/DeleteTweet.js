@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router'
+import {url} from './url'
 const DeleteTweet = () => {
 
     let location = useLocation()
@@ -16,7 +17,7 @@ const DeleteTweet = () => {
         index = location.state.tweet.tweetId
         console.log(index)
         if (index !== '') {
-            fetch('http://localhost:8083/deleteTweet', {
+            fetch(`${url}/deleteTweet`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json"

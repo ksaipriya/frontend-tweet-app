@@ -4,6 +4,7 @@ import Menu from "./NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/ViewTweets.css"
 import {   FaUserSecret } from "react-icons/fa";
+import { url } from './url'
 
 let tweets = []
 let dummy = []
@@ -27,7 +28,7 @@ export default function ViewTweets(props) {
     // fetching all tweets
     const fetchUserTweets = () => {
         console.log(location.state)
-        fetch('http://localhost:8083/allTweets')
+        fetch(`${url}/allTweets`)
             .then(res => {
                 return res.json()
             })
@@ -39,7 +40,7 @@ export default function ViewTweets(props) {
 
     // fetching all user's replies
     function fetchUserReplies() {
-        fetch('http://localhost:8083/getAllReplies')
+        fetch(`${url}/getAllReplies`)
             .then(res => {
                 return res.json()
             })
@@ -76,7 +77,7 @@ export default function ViewTweets(props) {
     // called when reply button is clicked
     function postReply() {
         console.log(replyContent)
-        fetch("http://localhost:8083/replyTweet", {
+        fetch(`${url}/replyTweet`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -111,7 +112,7 @@ export default function ViewTweets(props) {
     function handleLike(data) {
         console.log(data)
         setTweetIndex(data)
-        fetch("http://localhost:8083/likeTweet/", {
+        fetch(`${url}/likeTweet/`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

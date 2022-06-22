@@ -4,7 +4,9 @@ import { useNavigate, useLocation } from "react-router";
 import Menu from './NavBar'
 import Print from './Print'
 import html2canvas from 'html2canvas';
+import { FaUserSecret } from "react-icons/fa";
 import jsPDF from 'jspdf';
+import { url } from './url'
 
 let tweets = []
 let users = []
@@ -21,7 +23,7 @@ const TweetHistory = () => {
 
     function fetchUsers() {
         console.log(location.state)
-        fetch('http://localhost:8083/allTweets')
+        fetch(`${url}/allTweets`)
             .then(res => {
                 return res.json()
             })
@@ -40,7 +42,7 @@ const TweetHistory = () => {
     }
 
     function fetchTweetsOfUser(data) {
-        fetch('http://localhost:8083/allTweetsOfUser', {
+        fetch(`${url}/allTweetsOfUser`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -83,8 +85,11 @@ const TweetHistory = () => {
                 return (
                     <Container>
                         <Card>
-                            <Card.Title>{user}</Card.Title>
                             <Card.Body>
+                                <div>
+                            <FaUserSecret className='m-1' />
+                            <b className="title">{user}</b>
+                            </div><br/>
                                 <Button variant="primary" onClick={(event) => handleUserActivity(user)}>View User Activity</Button>
                             </Card.Body>
                         </Card>
@@ -112,18 +117,18 @@ const TweetHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {
-                            history.map(function (tweet, index) {
-                                return (
-                                    <tr>
-                                        <td>{tweet.username}</td>
-                                        <td>{tweet.tweetId}</td>
-                                        <td>{tweet.tweetContent}</td>
-                                        <td>{tweet.postTime}</td>
-                                    </tr>
-                                )
-                            })}
-                            </tbody>
+                            {
+                                history.map(function (tweet, index) {
+                                    return (
+                                        <tr>
+                                            <td>{tweet.username}</td>
+                                            <td>{tweet.tweetId}</td>
+                                            <td>{tweet.tweetContent}</td>
+                                            <td>{tweet.postTime}</td>
+                                        </tr>
+                                    )
+                                })}
+                        </tbody>
                     </Table>
                 </ModalBody>
             </Modal>

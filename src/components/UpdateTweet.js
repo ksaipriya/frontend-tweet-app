@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {  Col, Button, Form, Modal, ModalBody, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router'
 import SuccessHeader from './SuccessBody'
+import { url } from './url'
 
 const UpdateTweet = () => {
 
@@ -16,7 +17,7 @@ const UpdateTweet = () => {
         index = location.state.tweet.tweetId
         console.log(index)
         if(tweet!==''){
-        fetch("http://localhost:8083/updateTweet/", {
+        fetch(`${url}/updateTweet/`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",

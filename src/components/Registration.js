@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Header from "./Header";
 import "../styles/Registration.css"
 import { Form, Button, Container } from 'react-bootstrap';
+import { url } from './url'
 
 export default function Registration() {
     let navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function Registration() {
             let customerId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
             form.userId = "U" + customerId
             console.log(form.firstName)
-            fetch("http://localhost:8083/register", {
+            fetch(`${url}/register`, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form)
