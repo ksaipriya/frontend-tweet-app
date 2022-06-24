@@ -2,7 +2,6 @@ import { Container, Table, Card, Button, Modal, ModalHeader, ModalBody, ModalTit
 import { useEffect, useState, React } from "react";
 import { useNavigate, useLocation } from "react-router";
 import Menu from './NavBar'
-import Print from './Print'
 import html2canvas from 'html2canvas';
 import { FaUserSecret } from "react-icons/fa";
 import jsPDF from 'jspdf';
@@ -86,10 +85,10 @@ const TweetHistory = () => {
                     <Container>
                         <Card>
                             <Card.Body>
-                                <div>
-                            <FaUserSecret className='m-1' />
-                            <b className="title">{user}</b>
-                            </div><br/>
+                                <>
+                                    <FaUserSecret className='m-1' />
+                                    <b className="title">{user}</b>
+                                </><br /><br />
                                 <Button variant="primary" onClick={(event) => handleUserActivity(user)}>View User Activity</Button>
                             </Card.Body>
                         </Card>
